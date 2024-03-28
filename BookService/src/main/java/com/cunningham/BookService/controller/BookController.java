@@ -24,10 +24,16 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    // Create a new book
-    @PostMapping
+    // Save a new book
+    @PostMapping("/save")
     public Book createBook(@Valid @RequestBody Book book) {
         return bookService.saveBook(book);
+    }
+
+    // Saves all books in list
+    @PostMapping("/saveAll")
+    public List<Book> saveBooks(@Valid @RequestBody List<Book> books) {
+        return bookService.saveAllBooks(books);
     }
 
     // Get a single book by ID
@@ -39,7 +45,7 @@ public class BookController {
     }
 
     // Update a book
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @Valid @RequestBody Book bookDetails) {
         return bookService.getBookById(id)
                 .map(book -> {
@@ -64,10 +70,9 @@ public class BookController {
 
     // Search for a book by title
     @GetMapping("/search")
-    public ResponseEntity<String> findByTitle(@RequestParam String title) {
+    public ResponseEntity<Boolean> findByTitle(@RequestParam String title) {
         Optional<Book> book = bookService.findByTitle(title);
-        return book.map(value -> ResponseEntity.ok("Book exists: " + value.toString()))
-                .orElseGet(() -> ResponseEntity.ok("Book not found"));
+        return ResponseEntity.ok(book.isPresent());
     }
 
     // Find all books by an author
