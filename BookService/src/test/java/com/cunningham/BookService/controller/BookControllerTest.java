@@ -38,7 +38,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void getAllBooksTest() throws Exception {
+    void getAllBooks_ControllerTest() throws Exception {
         Book book1 = new Book(1L, "The Great Gatsby", "F. Scott Fitzgerald");
         Book book2 = new Book(2L, "1984", "George Orwell");
 
@@ -52,7 +52,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void createBookTest() throws Exception {
+    void createBook_ControllerTest() throws Exception {
         Book newBook = new Book(3L, "Brave New World", "Aldous Huxley");
         String newBookJson = "{\"title\":\"Brave New World\",\"author\":\"Aldous Huxley\"}";
 
@@ -67,7 +67,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void saveBooksTest() throws Exception {
+    void saveBooks_ControllerTest() throws Exception {
         List<Book> booksToSave = Arrays.asList(new Book(null, "To Kill a Mockingbird", "Harper Lee"), new Book(null, "The Catcher in the Rye", "J.D. Salinger"));
         String booksJson = "[{\"title\":\"To Kill a Mockingbird\",\"author\":\"Harper Lee\"}, {\"title\":\"The Catcher in the Rye\",\"author\":\"J.D. Salinger\"}]";
 
@@ -83,7 +83,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void getBookByIdTest() throws Exception {
+    void getBookById_ControllerTest() throws Exception {
         Book book = new Book(1L, "Moby Dick", "Herman Melville");
 
         given(bookService.getBookById(1L)).willReturn(Optional.of(book));
@@ -95,7 +95,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void updateBookTest() throws Exception {
+    void updateBook_ControllerTest() throws Exception {
         Book originalBook = new Book(1L, "Old Title", "Old Author");
         Book updatedBook = new Book(1L, "New Title", "New Author");
         String updatedBookJson = "{\"title\":\"New Title\",\"author\":\"New Author\"}";
@@ -112,7 +112,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void deleteBookTest() throws Exception {
+    void deleteBook_ControllerTest() throws Exception {
         Long bookId = 1L;
         doNothing().when(bookService).deleteBook(bookId);
 
@@ -123,7 +123,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void findByTitleTest_BookExists() throws Exception {
+    void findByTitle_BookExists_ControllerTest() throws Exception {
         Book book = new Book(1L, "Searched Title", "Author");
         given(bookService.findByTitle("Searched Title")).willReturn(Optional.of(book));
 
@@ -133,7 +133,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void findByTitleTest_BookNotFound() throws Exception {
+    void findByTitle_BookNotFound_ControllerTest() throws Exception {
         given(bookService.findByTitle("Nonexistent Title")).willReturn(Optional.empty());
 
         mockMvc.perform(get("/api/books/search?title=Nonexistent Title"))
@@ -142,7 +142,7 @@ public class BookControllerTest {
     }
 
     @Test
-    void findByAuthorTest() throws Exception {
+    void findByAuthor_ControllerTest() throws Exception {
         List<Book> books = Arrays.asList(new Book(1L, "Book One", "Queried Author"), new Book(2L, "Book Two", "Queried Author"));
         given(bookService.findByAuthor("Queried Author")).willReturn(books);
 

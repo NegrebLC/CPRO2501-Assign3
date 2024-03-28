@@ -22,7 +22,7 @@ public class OrderServiceTest {
     private OrderService orderService;
 
     @Test
-    void createOrderSuccess() {
+    void createOrderSuccess_ServiceTest() {
         Order order = new Order(1L, "Sample Book", 1, "customer@example.com");
         when(orderRepository.save(any(Order.class))).thenReturn(new Order(1L, "Sample Book", 1, "customer@example.com"));
 

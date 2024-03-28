@@ -32,7 +32,7 @@ public class OrderControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void createOrderBookExists() throws Exception {
+    void createOrderBookExists_ControllerTest() throws Exception {
         when(bookServiceClient.getBookByTitle(any(String.class))).thenReturn(true);
 
         Order order = new Order(null, "Sample Book", 1, "customer@example.com");
@@ -45,7 +45,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    void createOrderBookNotFound() throws Exception {
+    void createOrderBookNotFound_ControllerTest() throws Exception {
         when(bookServiceClient.getBookByTitle(any(String.class))).thenReturn(false);
 
         Order order = new Order(null, "Nonexistent Book", 1, "customer@example.com");

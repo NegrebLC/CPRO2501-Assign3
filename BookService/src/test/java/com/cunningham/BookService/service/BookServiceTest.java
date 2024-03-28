@@ -25,7 +25,7 @@ public class BookServiceTest {
     private BookService bookService;
 
     @Test
-    void getAllBooks_ReturnsListOfBooks() {
+    void getAllBooks_ServiceTest() {
         List<Book> expectedBooks = Arrays.asList(
                 new Book(1L, "Test Book 1", "Test Author 1"),
                 new Book(2L, "Test Book 2", "Test Author 2")
@@ -39,7 +39,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void getBookById_ReturnsBook() {
+    void getBookById_ServiceTest() {
         Optional<Book> expectedBook = Optional.of(new Book(1L, "Test Book", "Test Author"));
         when(bookRepository.findById(1L)).thenReturn(expectedBook);
 
@@ -50,7 +50,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void saveBook_SavesAndReturnsBook() {
+    void saveBook_ServiceTest() {
         Book bookToSave = new Book(null, "New Book", "New Author");
         Book savedBook = new Book(1L, "New Book", "New Author");
         when(bookRepository.save(bookToSave)).thenReturn(savedBook);
@@ -62,7 +62,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void saveAllBooks_SavesAndReturnsBooks() {
+    void saveAllBooks_ServiceTest() {
         List<Book> booksToSave = Arrays.asList(
                 new Book(null, "New Book 1", "New Author 1"),
                 new Book(null, "New Book 2", "New Author 2")
@@ -76,7 +76,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void deleteBook_DeletesById() {
+    void deleteBook_ServiceTest() {
         Long bookId = 1L;
         doNothing().when(bookRepository).deleteById(bookId);
 
@@ -86,7 +86,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void findByTitle_ReturnsBook() {
+    void findByTitle_ServiceTest() {
         String title = "Existing Book";
         Optional<Book> expectedBook = Optional.of(new Book(1L, title, "Author"));
         when(bookRepository.findByTitle(title)).thenReturn(expectedBook);
@@ -98,7 +98,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void findByAuthor_ReturnsListOfBooks() {
+    void findByAuthor_ServiceTest() {
         String author = "Existing Author";
         List<Book> expectedBooks = Arrays.asList(new Book(1L, "Book 1", author));
         when(bookRepository.findByAuthor(author)).thenReturn(expectedBooks);
